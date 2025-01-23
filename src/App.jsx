@@ -47,6 +47,13 @@ const App = () => {
   const handleAddCountry = (event) => {
     event.preventDefault();
     // 국가명 존재여부 검증
+
+    // 한글만 입력되었는지 확인
+    const koreanPattern = /^[가-힣]+$/;
+    if (!koreanPattern.test(countryName)) {
+      alert("국가명은 한글로만 입력해야 합니다.");
+      return;
+    }
     if (countries.some((country) => country.name === countryName)) {
       alert("해당 국가명이 이미 존재합니다.");
       resetForm();
