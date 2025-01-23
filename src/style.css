@@ -74,12 +74,25 @@ button {
   padding: 5px 10px;
 }
 
-.headerContent {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  gap: 20px;
-  padding: 0px 20px;
+.header {
+  position: relative;
+  text-align: center;
+}
+
+.title {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.totalCheckBox {
+  position: absolute;
+  right: 20px;
+  top: 25px;
+  width: 100px;
+}
+
+.totalCheckBox input {
+  margin-top: 5px;
 }
 
 .input-field {

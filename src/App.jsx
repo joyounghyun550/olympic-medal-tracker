@@ -8,18 +8,25 @@ const App = () => {
   const [silverCount, setSilverCount] = useState("");
   const [bronzeCount, setBronzeCount] = useState("");
   const [countries, setCountries] = useState([]);
+  const [isChecked, setIsChecked] = useState(false);
 
   // 국가 추가 핸들러
   const handleAddCountry = (event) => {
     event.preventDefault();
-    const newCountry = {
-      name: countryName,
-      gold: goldCount,
-      silver: silverCount,
-      bronze: bronzeCount,
-    };
-    setCountries([...countries, newCountry]);
-    resetForm();
+    // 국가명 존재여부 검증
+    if (countries.some((country) => country.name === countryName)) {
+      alert("해당 국가명이 이미 존재합니다.");
+      resetForm();
+    } else {
+      const newCountry = {
+        name: countryName,
+        gold: goldCount,
+        silver: silverCount,
+        bronze: bronzeCount,
+      };
+      setCountries([...countries, newCountry]);
+      resetForm();
+    }
   };
 
   // 국가 업데이트 핸들러
@@ -34,9 +41,11 @@ const App = () => {
           bronze: bronzeCount,
         };
       }
+      resetForm();
       return country;
     });
 
+    // 국가명 업데이트 검증
     if (updatedCountries.some((country) => country.name === countryName)) {
       setCountries(updatedCountries);
       resetForm();
@@ -69,10 +78,56 @@ const App = () => {
     setBronzeCount("");
   };
 
+  // 체크박스 확인 여부
+  const CheckedHandler = () => {
+    setIsChecked(!isChecked);
+  };
+
+  // 정렬된 리스트를 반환하는 함수
+  const changeSortedItems = () => {
+    const countriesCopy = [...countries];
+
+    // 메달 수에 따라 정렬하는 함수
+    const sortByMedals = (a, b) => {
+      const totalA = Number(a.gold) + Number(a.silver) + Number(a.bronze);
+      const totalB = Number(b.gold) + Number(b.silver) + Number(b.bronze);
+      return totalB - totalA;
+    };
+
+    // 금, 은, 동 메달에 따라 정렬하는 함수
+    const sortByIndividualMedals = (a, b) => {
+      if (b.gold !== a.gold) {
+        return b.gold - a.gold;
+      } else if (b.silver !== a.silver) {
+        return b.silver - a.silver;
+      } else {
+        return b.bronze - a.bronze;
+      }
+    };
+
+    // isChecked에 따라 정렬 기준 선택
+    return isChecked
+      ? countriesCopy.sort(sortByMedals)
+      : countriesCopy.sort(sortByIndividualMedals);
+  };
+
   return (
     <>
       <div className="container">
-        <h1>2024 파리 올림픽</h1>
+        <div className="header">
+          <div className="title">
+            <h1>2024 파리 올림픽</h1>
+          </div>
+          <div className="totalCheckBox">
+            <label>총 메달수 정렬</label>
+            <input
+              className="checkbox"
+              type="checkbox"
+              checked={isChecked}
+              onChange={CheckedHandler}
+            />
+          </div>
+        </div>
         <form className="inputBox" onSubmit={handleAddCountry}>
           <div className="input-field">
             <label>국가명</label>
@@ -139,7 +194,7 @@ const App = () => {
                 </tr>
               </thead>
               <tbody>
-                {countries.map((country, index) => {
+                {changeSortedItems().map((country, index) => {
                   const rowClass = index % 2 === 0 ? "even-row" : "odd-row";
                   return (
                     <tr key={index} className={rowClass}>
