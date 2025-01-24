@@ -16,7 +16,7 @@ const CountryTable = ({ countries, onDelete }) => {
         {countries.map((country, index) => {
           const rowClass = index % 2 === 0 ? "even-row" : "odd-row";
           return (
-            <tr key={index} className={rowClass}>
+            <tr key={country.name} className={rowClass}>
               <td>{country.name}</td>
               <td>{country.gold}</td>
               <td>{country.silver}</td>
