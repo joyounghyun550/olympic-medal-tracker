@@ -116,7 +116,7 @@ const App = () => {
         onUpdate={handleUpdateCountry}
       />
       <CountryTable
-        countries={changeSortedItems()}
+        countries={changeSortedItems}
         onDelete={handleDeleteCountry}
       />
     </div>
