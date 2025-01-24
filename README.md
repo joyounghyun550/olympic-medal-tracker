@@ -1,8 +1,74 @@
-# React + Vite
+# 2024 파리 올림픽 메달 추적기
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+이 프로젝트는 사용자가 2024 파리 올림픽에 참가하는 국가들의 메달 수를 추적할 수 있는 간단한 React 애플리케이션입니다. 사용자는 국가를 추가, 수정, 삭제할 수 있으며, 각 국가의 금메달, 은메달, 동메달 수를 관리할 수 있습니다. 데이터는 브라우저의 로컬 스토리지에 저장되어 페이지를 새로 고침해도 유지됩니다.
 
-Currently, two official plugins are available:
+## 기능
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **국가 추가**: 국가와 그에 해당하는 메달 수(금메달, 은메달, 동메달)를 추가할 수 있습니다.
+- **국가 수정**: 기존 국가의 메달 수를 수정할 수 있습니다.
+- **국가 삭제**: 국가를 리스트에서 삭제할 수 있습니다.
+- **정렬 기능**: 국가를 총 메달 수로 정렬하거나 개별 메달 수로 정렬하는 기능을 제공.
+- **영속적인 데이터**: 데이터는 `localStorage`에 저장되어 브라우저 세션 간 데이터를 유지합니다.
+- **반응형 디자인**: 화면 크기에 맞춰 레이아웃이 자동으로 조정되어 데스크탑과 모바일에서도 사용자 친화적인 인터페이스를 제공합니다.
+
+## 설치 방법
+
+이 프로젝트를 로컬 환경에서 실행하려면 아래의 단계를 따르세요:
+
+1. **저장소 클론**:
+
+   ```bash
+   git clone https://github.com/joyounghyun550/olympic-medal-tracker.git
+   ```
+
+2. **프로젝트 디렉터리로 이동**:
+
+   ```bash
+   cd olympic-medal-tracker
+   ```
+
+3. **의존성 설치**:
+
+   ```bash
+   yarn
+   ```
+
+4. **프로젝트 실행**:
+
+   ```bash
+   yarn dev
+   ```
+
+   애플리케이션은 [http://localhost:5173/]에서 실행됩니다.
+
+## 사용 방법
+
+앱이 실행되면 다음과 같은 작업을 할 수 있습니다:
+
+- **국가 추가**: 국가명과 메달 수(금메달, 은메달, 동메달)를 입력한 후 "국가 추가" 버튼을 클릭합니다.
+- **국가 수정**: 수정할 국가의 메달 수를 변경한 후 "업데이트" 버튼을 클릭합니다.
+- **국가 삭제**: 국가 리스트에서 "삭제" 버튼을 클릭하여 해당 국가를 삭제합니다.
+- **데이터 정렬**: 체크박스를 클릭하여 국가를 총 메달 수로 정렬하거나 개별 메달 수로 정렬할 수 있습니다.
+
+## 파일 설명
+
+- **App.jsx**: 애플리케이션의 주요 React 컴포넌트로, 국가 추가, 수정, 삭제 등의 로직을 관리합니다.
+- **Header.jsx**: 애플리케이션 제목과 정렬 체크박스를 표시합니다.
+- **Form.jsx**: 국가 데이터(이름 및 메달 수)를 입력하고 제출하는 폼 컴포넌트입니다.
+- **CountryTable.jsx**: 국가 목록과 해당 국가의 메달 수를 보여주는 테이블 컴포넌트입니다.
+- **localStorageUtil.js**: 로컬 스토리지와 상호작용하는 유틸리티 함수입니다.
+- **style.css**: 애플리케이션의 스타일을 정의한 CSS 파일입니다.
+
+## 사용된 기술
+
+- **React**: 사용자 인터페이스를 구축하기 위한 JavaScript 라이브러리입니다.
+- **PropTypes**: React 컴포넌트의 props에 대한 타입 체크를 위한 라이브러리입니다.
+- **CSS**: 애플리케이션의 반응형 스타일을 위한 커스텀 CSS입니다.
+
+## 기여 방법
+
+이 프로젝트에 기여하고 싶다면, 저장소를 포크한 후 기능 추가나 버그 수정을 위해 별도의 브랜치를 만들어 Pull Request를 제출해 주세요. 코딩 표준을 준수하고, 가능한 경우 테스트를 작성해 주시기 바랍니다.
+
+## 라이센스
+
+이 프로젝트는 MIT 라이센스 하에 제공됩니다 - 자세한 내용은 [LICENSE](LICENSE) 파일을 참고해 주세요.
