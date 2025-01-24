@@ -26,6 +26,13 @@ const Form = ({
     }
   };
 
+  function preventLeadingZero(input) {
+    // 첫 번째 문자가 "0"이고 그 뒤에 다른 숫자가 있으면 "0" 제거
+    if (input.value && input.value[0] === "0") {
+      input.value = input.value.replace(/^0+(?=\d)/, ""); // 첫 번째 "0" 이후에 다른 숫자가 올 경우 "0"을 제거
+    }
+  }
+
   return (
     <form className="inputBox" onSubmit={handleSubmit}>
       {/* 국가명 입력 필드 */}
@@ -50,6 +57,7 @@ const Form = ({
           placeholder="금메달의 개수를 입력해주세요." // 입력 필드에 표시되는 안내 텍스트
           min={0} // 입력 가능한 최소값 설정 (0 이상)
           required // 필수 입력 필드로 설정
+          onInput={(event) => preventLeadingZero(event.target)} //0이 중복되면 0을 제거
         />
       </div>
 
@@ -63,6 +71,7 @@ const Form = ({
           placeholder="은메달의 개수를 입력해주세요." // 입력 필드에 표시되는 안내 텍스트
           min={0} // 입력 가능한 최소값 설정 (0 이상)
           required // 필수 입력 필드로 설정
+          onInput={(event) => preventLeadingZero(event.target)} //0이 중복되면 0을 제거
         />
       </div>
 
@@ -76,6 +85,7 @@ const Form = ({
           placeholder="동메달의 개수를 입력해주세요." // 입력 필드에 표시되는 안내 텍스트
           min={0} // 입력 가능한 최소값 설정 (0 이상)
           required // 필수 입력 필드로 설정
+          onInput={(event) => preventLeadingZero(event.target)} //0이 중복되면 0을 제거
         />
       </div>
 
