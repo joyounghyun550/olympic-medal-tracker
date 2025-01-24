@@ -12,15 +12,19 @@ const Form = ({
   onAdd,
   onUpdate,
 }) => {
-  const handleInputChange = (setter) => (event) => {
-    const value = Number(event.target.value);
-    if (value >= 0 || event.target.value === "") {
-      setter(event.target.value);
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    // 버튼이 어떤 동작을 해야 하는지 구분
+    if (event.nativeEvent.submitter.name === "addBtn") {
+      onAdd(event); // 국가 추가
+    } else if (event.nativeEvent.submitter.name === "updateBtn") {
+      onUpdate(event); // 업데이트
     }
   };
 
   return (
-    <form className="inputBox" onSubmit={onAdd}>
+    <form className="inputBox" onSubmit={handleSubmit}>
       <div className="input-field">
         <label>국가명</label>
         <input
@@ -36,7 +40,7 @@ const Form = ({
         <input
           type="number"
           value={goldCount}
-          onChange={handleInputChange(setGoldCount)}
+          onChange={(event) => setGoldCount(event.target.value)}
           placeholder="금메달의 개수를 입력해주세요."
           min={0}
           required
@@ -47,7 +51,7 @@ const Form = ({
         <input
           type="number"
           value={silverCount}
-          onChange={handleInputChange(setSilverCount)}
+          onChange={(event) => setSilverCount(event.target.value)}
           placeholder="은메달의 개수를 입력해주세요."
           min={0}
           required
@@ -58,17 +62,17 @@ const Form = ({
         <input
           type="number"
           value={bronzeCount}
-          onChange={handleInputChange(setBronzeCount)}
+          onChange={(event) => setBronzeCount(event.target.value)}
           placeholder="동메달의 개수를 입력해주세요."
           min={0}
           required
         />
       </div>
       <div className="clickBtn">
-        <button type="submit" className="addBtn">
+        <button type="submit" name="addBtn">
           국가 추가
         </button>
-        <button onClick={onUpdate} className="updateBtn">
+        <button type="submit" name="updateBtn">
           업데이트
         </button>
       </div>

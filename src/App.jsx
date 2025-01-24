@@ -40,6 +40,7 @@ const App = () => {
 
   const handleUpdateCountry = (event) => {
     event.preventDefault();
+
     const updatedCountries = countries.map((country) =>
       country.name === countryName
         ? {
