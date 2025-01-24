@@ -43,7 +43,7 @@ const CountryTable = ({ countries, onDelete }) => {
 
 // PropTypes 추가
 CountryTable.propTypes = {
-  countries: PropTypes.func.isRequired,
+  countries: PropTypes.array.isRequired,
   onDelete: PropTypes.func.isRequired,
 };
 
